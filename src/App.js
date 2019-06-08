@@ -12,17 +12,14 @@ class App extends Component {
   }
 
   async componentDidMount() {
-      let web3 = await this.obtainWeb3();
-      console.log(web3)
-      this.setState({web3: web3});
+      await this.obtainWeb3();
   }
 
   async obtainWeb3() {
-      let web3 = await getWeb3();
+      let web3 = await getWeb3;
       try {
         const accounts = await window.ethereum.enable();
-        this.setState({account: window.ethereum.selectedAddress});
-        return web3;
+        this.setState({account: window.ethereum.selectedAddress, web3: web3});
       } catch(e) {
         console.log("User rejected access")
       }
