@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import Home from './components/Home';
 import Dashboard from './components/Dashboard';
 import Error from './components/Error';
+import EventCreator from './components/EventCreator';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -15,6 +17,7 @@ ReactDOM.render(
       <IndexRoute component={Home} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/error" component={Error} />
+        <Route path="/createEvent" component={EventCreator} />
     </Route>
   </Router>
   ,

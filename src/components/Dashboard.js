@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-
+import { Button } from 'reactstrap'
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props)
-    console.log(this.props.web3)
     this.state = {
       profile: this.props.location.state.profile,
     }
@@ -19,6 +17,9 @@ export default class Dashboard extends Component {
         <h2>
         Your account is {this.props.account}
         </h2>
+        <br />
+        <Button color="primary" href="/createEvent">Create An Event</Button>
+        <Button color="success" href="/viewEvent">View events</Button>
       </div>
     )
   }
