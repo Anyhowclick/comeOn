@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Card, CardHeader, CardBody, CardFooter, CardTitle, CardSubtitle, CardText, Col, Container, Row } from 'reactstrap'
-import EventCard from './EventCard'
-import axios from 'axios'
+import { Button, Card, CardHeader, CardBody, CardFooter, CardTitle, CardSubtitle, CardText } from 'reactstrap'
 
 const ABI = [
 	{
@@ -220,24 +218,14 @@ const ABI = [
 export default class EventViewer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      data: []
-    }
 
-    this.getAllEvents = this.getAllEvents.bind(this);
     this.joinEvent = this.joinEvent.bind(this);
   }
 
-  async componentDidMount() {
-    let response = await axios.get("http://localhost:5000/events");
-    let data = response.data;
-    this.setState({data: data});
-  }
-
-  async joinEvent(event) {
+  async joinEvent() {
     if(this.props.web3) {
       let web3 = this.props.web3.web3;
-      let contract = new web3.eth.Contract(ABI,event.contractAddress);
+      let contract = new web3.eth.Contract(ABI,this.props.event.contractAddress);
       await contract.methods.enter().send({
         from: this.props.account,
         value: 0,
@@ -247,34 +235,19 @@ export default class EventViewer extends Component {
     }
   }
 
-    getAllEvents() {
-      if (this.state.data === null) {return}
-      var eventCards = this.state.data.map((event,key) => {
-        return (
-          <Col xs="12" lg="6">
-						<EventCard
-						event={event}
-						web3={this.props.web3}
-						account={this.props.account}
-						{... this.props}
-						/>
-          </Col>
-        )
-      }
-		);
-
-		return eventCards;
-  }
-
   render() {
     return (
-      <Container>
-        <Col xs="6">
-          <Row>
-          {this.getAllEvents()}
-          </Row>
-        </Col>
-      </Container>
+      <Card>
+        <CardHeader tag="h3">{this.props.event.eventName}</CardHeader>
+        <CardBody>
+          <CardText>{this.props.event.eventDescription}</CardText>
+          <Button onClick={this.joinEvent} color="success">Join Event!</Button>
+        </CardBody>
+        <CardFooter>
+        Start date: {this.props.event.startDate}<br/>
+        End date: {this.props.event.endDate}
+        </CardFooter>
+      </Card>
     )
   }
 }

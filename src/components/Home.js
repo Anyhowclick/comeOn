@@ -10,7 +10,6 @@ export default class Home extends Component {
   }
 
   proceedToDashboard(response) {
-    console.log(response)
     this.props.router.push({
       pathname: '/dashboard',
       state: {profile:response.profileObj}

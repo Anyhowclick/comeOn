@@ -7,6 +7,7 @@ export default class Dashboard extends Component {
     super(props);
     this.state = {
       profile: this.props.location.state.profile,
+      web3: this.props.web3
     }
 
     this.routeToCreateEvent = this.routeToCreateEvent.bind(this);
