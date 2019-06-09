@@ -251,14 +251,12 @@ export default class EventCreator extends Component {
 			let address = "0x" + web3.utils.sha3(RLP.encode([this.props.account,nonce])).slice(12).substring(14);
 			this.setState({contractAddress: address});
 			await this.pushNewEventDataToServer();
-			let startDateInUTC = new Date(this.state.startDate).getTime();
-			startDateInUTC = startDateInUTC / 1000;
-			let endDateInUTC = new Date(this.state.endDate).getTime();
-			endDateInUTC = endDateInUTC / 1000;
+			let startInSeconds = 10;
+			let endInSeconds = 3600;
       const myContract = new web3.eth.Contract(ABI);
       await myContract.deploy({
         data:"0x" + bytecode,
-				arguments: [startDateInUTC,endDateInUTC]
+				arguments: [startInSeconds,endInSeconds]
       })
       .send({
         from: this.props.account,
