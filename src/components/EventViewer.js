@@ -26,7 +26,6 @@ export default class EventViewer extends Component {
             <Card>
               <CardHeader tag="h3">{event.eventName}</CardHeader>
               <CardBody>
-                <CardTitle>{event.eventType}</CardTitle>
                 <CardText>{event.eventDescription}</CardText>
               </CardBody>
               <CardFooter>
